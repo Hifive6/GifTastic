@@ -14,8 +14,18 @@
         <h1>Please Press on a Button</h1>
 
         <div id = "image-view"></div>
-
+        
         <div id = "button-view"></div>
+
+        <br>
+        
+        <form id = "gif-form">
+            <label for="gif-input">Pleae add another Image</label>
+            <input type="text" id="gif-input">
+            <br>
+            <input id="add-gif" type="submit" value+"Please add another Image">
+        </form>
+        
         </div>
     <script type = "text/javascript">
     
@@ -33,8 +43,10 @@
 
         console.log(queryURL);
         console.log(response.data);
+    gifButtons();
 
-    //function gifButtons() {
+    })
+function gifButtons() {
         
         $("#button-view").empty();
 
@@ -45,14 +57,22 @@
             btn.attr("data-image", topics[i]);
 
             btn.text(topics[i]);
+            console.log(btn);
 
-            $("#button-view").append(btn);
+            $("#button-view").append( " " + " " , btn);
         }
-    //}
+    }
 
 
+    $("#add-gif").on("click", function(event){
+        event.preventDefault();
+
+        var image = $("#gif-input").val().trim();
+
+        image.push(image);
+
+        gitButtons();
     })
-
 //}
     
     
