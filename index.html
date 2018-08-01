@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+
+    <div class = "container">
+        <h1>Please Press on a Button</h1>
+
+        <div id = "image-view"></div>
+
+        <div id = "button-view"></div>
+        </div>
+    <script type = "text/javascript">
+    
+    var topics = [ "dunks", "hot air balloons", "sunsets", "purple flowers", "video games", "buddha" ];
+
+
+//function showGifs()
+
+    var queryURL = 'https://api.giphy.com/v1/gifs/trending?api_key=hnrQknVxkV00GDBih13FYJv5MLi1i4ZJ';
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response){
+
+        console.log(queryURL);
+        console.log(response.data);
+
+    //function gifButtons() {
+        
+        $("#button-view").empty();
+
+        for (var i = 0; i < topics.length; i++){
+            var btn = $("<button>");
+
+            btn.addClass("gif");
+            btn.attr("data-image", topics[i]);
+
+            btn.text(topics[i]);
+
+            $("#button-view").append(btn);
+        }
+    //}
+
+
+    })
+
+//}
+    
+    
+    
+    
+    </script>
+
+
+
+    
+
+        <!-- <script  src="assets/javascript/app.js"></script>    -->
+</body>
+</html>
