@@ -8,44 +8,48 @@
 
     <title>Document</title>
 </head>
-<body>
+<body> 
+    
+<h1>Please Press on a Button</h1>
 
-    <div class = "container">
-        <h1>Please Press on a Button</h1>
 
-        <div id = "image-view"></div>
+<div id = "button-view"></div>
         
-        <div id = "button-view"></div>
-
+ <div id = "image-view"></div>
         <br>
         
-        <form id = "gif-form">
+<!-- <form id = "gif-form">
             <label for="gif-input">Pleae add another Image</label>
             <input type="text" id="gif-input">
             <br>
-            <input id="add-gif" type="submit" value+"Please add another Image">
-        </form>
+            <input id="add-gif" type="submit" value="Submit">
+        </form>         -->
         
-        </div>
+       
     <script type = "text/javascript">
     
-    var topics = [ "dunks", "hot air balloons", "sunsets", "purple flowers", "video games", "buddha" ];
+    var topics = [ "Dunks", "Crossovers", "Shooting", "Bench", "MichaelJordan", "Bloopers" ];
 
 
-//function showGifs()
+        
+    
+    
 
-    var queryURL = 'https://api.giphy.com/v1/gifs/trending?api_key=hnrQknVxkV00GDBih13FYJv5MLi1i4ZJ';
-
+function showGifs(){
+  var showgif = $(this).attr("data-image");
+    console.log(this);
+//need to put this function inside a button to reference it later 
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=hnrQknVxkV00GDBih13FYJv5MLi1i4ZJ&limit=10&rating=Pg&tag=basketball&q="+showgif;
+    
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response){
-
-        console.log(queryURL);
-        console.log(response.data);
-    gifButtons();
+    }).done(function(response){
+        console.log(response);
+    
 
     })
+};
 function gifButtons() {
         
         $("#button-view").empty();
@@ -57,22 +61,23 @@ function gifButtons() {
             btn.attr("data-image", topics[i]);
 
             btn.text(topics[i]);
-            console.log(btn);
+            
 
-            $("#button-view").append( " " + " " , btn);
-        }
-    }
+            $("#button-view").append(btn);
+        }};
 
+    $(document).on("click", ".gif", showGifs);
 
-    $("#add-gif").on("click", function(event){
-        event.preventDefault();
+    gifButtons();
+    // $("#add-gif").on("click", function(event){
+    //     event.preventDefault();
 
-        var image = $("#gif-input").val().trim();
+    //     var image = $("#gif-input").val().trim();
 
-        image.push(image);
+    //     image.push(image);
 
-        gitButtons();
-    })
+    //     gitButtons();
+    // })
 //}
     
     
