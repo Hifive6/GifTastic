@@ -5,49 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <title>Document</title>
 </head>
 <body> 
     
-<h1>Please Press on a Button</h1>
 
 
-<div id = "button-view"></div>
-        
- <div id = "image-view"></div>
+<div class = "container">
+    <h1>Please Press on a Button</h1>
+    <div class = "row">
+        <div id = "button-view"></div>
+    </div>   
+ 
         <br>
-        
-<!-- <form id = "gif-form">
-            <label for="gif-input">Pleae add another Image</label>
-            <input type="text" id="gif-input">
-            <br>
-            <input id="add-gif" type="submit" value="Submit">
-        </form>         -->
-        
-       
+    <div class = "container">    
+    <div class = "row"> 
+         <div class = "col-md-8">
+            <div id = "image-view"></div> 
+        </div>  
+        <div class = "col-md-4">
+            <form id = "gif-form">
+                <label for="gif-input">Pleae add another Image</label>
+                <input type="text" id="gif-input">
+                <br>
+                <br>
+                <input id="add-gif" type="submit" value="New Search">
+             </form>       
+         </div>
+         
+    </div>     
+    </div>
+ </div>     
     <script type = "text/javascript">
-    
-    var topics = [ "Dunks", "Crossovers", "Shooting", "Bench", "MichaelJordan", "Bloopers" ];
+  
+    var topics = [ "Dunks", "Crossovers", "JumpShot", "Basketball Bench", "Michael Jordan", "Bloopers" ];
 
-
-        
-    
-    
+  
 
 function showGifs(){
   var showgif = $(this).attr("data-image");
-    console.log(this);
+    
 //need to put this function inside a button to reference it later 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=hnrQknVxkV00GDBih13FYJv5MLi1i4ZJ&limit=10&rating=Pg&tag=basketball&q="+showgif;
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=hnrQknVxkV00GDBih13FYJv5MLi1i4ZJ&limit=10&tag=basketball&q="+showgif;
     
     $.ajax({
         url: queryURL,
         method: "GET"
     }).done(function(response){
-        console.log(response);
+        
+        var results = response.data;
+        console.log(results);
+        $("#image-view").empty();
+
+        for (var i = 0; i < results.length; i++){
+            console.log(results.length)
+            var gifDiv = $("<div class='image' data-state = 'still'>");
+
+            var showRating = $("<p>").text("Rating: " + results[i].rating);
+            
+
+            var imageDiv = $("<img>");
+
+            imageDiv.attr("src", results[i].images.fixed_height_still.url);
+            imageDiv.attr({"data-animate" : results[i].images.fixed_height.url});
+            imageDiv.attr({"data-state" : "still"});
+            imageDiv.attr({"data-still" : results[i].images.fixed_height_still.url})
+
+            gifDiv.append(showRating);
+            gifDiv.append(imageDiv);
+
+            $("#image-view").append(gifDiv);
+
     
 
+
+
+        }
+
+    
+
+    
     })
 };
 function gifButtons() {
@@ -66,21 +105,35 @@ function gifButtons() {
             $("#button-view").append(btn);
         }};
 
+    
+
+    $("#add-gif").on("click", function(event){
+        event.preventDefault();
+
+        var newImage = $("#gif-input").val().trim();
+        $("#gif-input").val(" ");
+        topics.push(newImage);
+
+        gifButtons();
+    })
+
+    $(".gif").on("click", function(){
+
+        var state = $(this).attr("data-state");
+
+        if (state === "still"){
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+        }else{
+            $(this).attr("scr",$(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        }
+    })
+
+    
     $(document).on("click", ".gif", showGifs);
 
     gifButtons();
-    // $("#add-gif").on("click", function(event){
-    //     event.preventDefault();
-
-    //     var image = $("#gif-input").val().trim();
-
-    //     image.push(image);
-
-    //     gitButtons();
-    // })
-//}
-    
-    
     
     
     </script>
