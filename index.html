@@ -80,18 +80,31 @@ function showGifs(){
             gifDiv.append(imageDiv);
 
             $("#image-view").append(gifDiv);
+        };
+        $(".gif-image").on("click", function(){
 
-    
+        var state = $(this).attr("data-state");
+        console.log(this);
 
-
-
-        }
-
-    
-
-    
-    })
+            if (state === "still"){
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+            }else{
+                 $(this).attr("scr",$(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+                }
+        });
+    });
 };
+
+
+
+
+
+
+
+
+
 function gifButtons() {
         
         $("#button-view").empty();
@@ -120,18 +133,7 @@ function gifButtons() {
         gifButtons();
     })
 
-    $(".gif").on("click", function(){
-
-        var state = $(this).attr("data-state");
-
-        if (state === "still"){
-            $(this).attr("src", $(this).attr("data-animate"));
-            $(this).attr("data-state", "animate");
-        }else{
-            $(this).attr("scr",$(this).attr("data-still"));
-            $(this).attr("data-state", "still");
-        }
-    })
+    
 
     
     $(document).on("click", ".gif", showGifs);
