@@ -63,16 +63,19 @@ function showGifs(){
             console.log(results.length)
             var gifDiv = $("<div class='image' data-state = 'still'>");
 
-            var showRating = $("<p>").text("Rating: " + results[i].rating);
+            var showRating = $("<p>").text("Rating: " + results[i].rating.toUpperCase());
             
 
             var imageDiv = $("<img>");
 
             imageDiv.attr("src", results[i].images.fixed_height_still.url);
-            imageDiv.attr({"data-animate" : results[i].images.fixed_height.url});
-            imageDiv.attr({"data-state" : "still"});
-            imageDiv.attr({"data-still" : results[i].images.fixed_height_still.url})
+            imageDiv.addClass("gif-image");
 
+            imageDiv.attr("state", "still");
+           
+            imageDiv.attr("data-still", results[i].images.fixed_height_still.url);
+            
+            imageDiv.attr("data-animate", results[i].images.fixed_height.url);
             gifDiv.append(showRating);
             gifDiv.append(imageDiv);
 
