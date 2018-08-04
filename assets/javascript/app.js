@@ -1,6 +1,6 @@
 
   
-    var topics = [ "Dunks", "Crossovers", "JumpShot", "Basketball Bench", "Michael Jordan", "Bloopers" ];
+var topics = [ "Dunks", "Crossovers", "JumpShot", "Basketball Bench", "Michael Jordan", "Bloopers" ];
 
   
 
@@ -31,8 +31,6 @@ function showGifs(){
             imageDiv.addClass("gif-image");
             
             imageDiv.attr("src", results[i].images.fixed_height_still.url);
-            
-            
            
             imageDiv.attr("data-still", results[i].images.fixed_height_still.url);
             
@@ -57,27 +55,18 @@ function showGifs(){
                 console.log($(this).attr("src"));
                 
                 $(this).attr("data-state", "animate");
-                // console.log(this);
-                // console.log("hi world")
-                 
+                
                 
             }else{
                 $(this).attr("src", $(this).attr("data-still"));
                 console.log($(this).attr("src"));
 
                 $(this).attr("data-state", "still");
-                // console.log(this);
-                // console.log("Yes it works")
+                
                 }
         });
     });
 };
-
-
-
-
-
-
 
 
 
