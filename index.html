@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href=assets/css/style.css>
     <title>Document</title>
 </head>
 <body> 
@@ -14,7 +14,7 @@
 
 
 <div class = "container">
-    <h1>Please Press on a Button</h1>
+    <h1 class = "new-color">Please Press on a Button To See what Happens</h1>
     <div class = "row">
         <div id = "button-view"></div>
     </div>   
@@ -27,126 +27,22 @@
         </div>  
         <div class = "col-md-4">
             <form id = "gif-form">
-                <label for="gif-input">Pleae add another Image</label>
+                <label for="gif-input" class= "new-color">Please Add Another Button</label>
                 <input type="text" id="gif-input">
                 <br>
                 <br>
-                <input id="add-gif" type="submit" value="New Search">
+                <input id="add-gif" type="submit" value="New Button">
              </form>       
          </div>
          
     </div>     
     </div>
  </div>     
-    <script type = "text/javascript">
-  
-    var topics = [ "Dunks", "Crossovers", "JumpShot", "Basketball Bench", "Michael Jordan", "Bloopers" ];
-
-  
-
-function showGifs(){
-  var showgif = $(this).attr("data-image");
-    
-//need to put this function inside a button to reference it later 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=hnrQknVxkV00GDBih13FYJv5MLi1i4ZJ&limit=10&tag=basketball&q="+showgif;
-    
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).done(function(response){
-        
-        var results = response.data;
-        console.log(results);
-        $("#image-view").empty();
-
-        for (var i = 0; i < results.length; i++){
-            console.log(results.length)
-            var gifDiv = $("<div class='image' data-state = 'still'>");
-
-            var showRating = $("<p>").text("Rating: " + results[i].rating.toUpperCase());
-            
-
-            var imageDiv = $("<img>");
-
-            imageDiv.attr("src", results[i].images.fixed_height_still.url);
-            imageDiv.addClass("gif-image");
-
-            imageDiv.attr("state", "still");
-           
-            imageDiv.attr("data-still", results[i].images.fixed_height_still.url);
-            
-            imageDiv.attr("data-animate", results[i].images.fixed_height.url);
-            gifDiv.append(showRating);
-            gifDiv.append(imageDiv);
-
-            $("#image-view").append(gifDiv);
-        };
-        $(".gif-image").on("click", function(){
-
-        var state = $(this).attr("data-state");
-        console.log(this);
-
-            if (state === "still"){
-                $(this).attr("src", $(this).attr("data-animate"));
-                $(this).attr("data-state", "animate");
-            }else{
-                 $(this).attr("scr",$(this).attr("data-still"));
-                $(this).attr("data-state", "still");
-                }
-        });
-    });
-};
-
-
-
-
-
-
-
-
-
-function gifButtons() {
-        
-        $("#button-view").empty();
-
-        for (var i = 0; i < topics.length; i++){
-            var btn = $("<button>");
-
-            btn.addClass("gif");
-            btn.attr("data-image", topics[i]);
-
-            btn.text(topics[i]);
-            
-
-            $("#button-view").append(btn);
-        }};
-
-    
-
-    $("#add-gif").on("click", function(event){
-        event.preventDefault();
-
-        var newImage = $("#gif-input").val().trim();
-        $("#gif-input").val(" ");
-        topics.push(newImage);
-
-        gifButtons();
-    })
-
-    
-
-    
-    $(document).on("click", ".gif", showGifs);
-
-    gifButtons();
-    
-    
-    </script>
 
 
 
     
 
-        <!-- <script  src="assets/javascript/app.js"></script>    -->
+        <script  src="assets/javascript/app.js"></script>   
 </body>
 </html>
