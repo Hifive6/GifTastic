@@ -55,14 +55,13 @@ function showGifs(){
             //this if statement makes it so that when clicked the image will animate
             if (state === "still"){
                 $(this).attr("src", $(this).attr("data-animate"));
-                console.log($(this).attr("src"));
-                
+            
                 $(this).attr("data-state", "animate");
                 
              //this will if clicked again the image will reset to still image   
             }else{
                 $(this).attr("src", $(this).attr("data-still"));
-                console.log($(this).attr("src"));
+                
 
                 $(this).attr("data-state", "still");
                 
@@ -99,6 +98,7 @@ function gifButtons() {
         //on to the new button area.
         var newImage = $("#gif-input").val().trim();
         $("#gif-input").val(" ");
+        console.log(newImage)
         topics.push(newImage);
         //Calling this function in this event will give I think the functionanlity of alll the other buttons
         gifButtons();
